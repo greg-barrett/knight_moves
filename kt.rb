@@ -34,7 +34,8 @@ class Tree
       second=0 if second ==nil
       result<<"\[#{first},#{second}\] =>"
     end
-    puts "You made is in #{@route.length-1} moves!"
+    puts "You can get there in #{@route.length-1} moves."
+    puts""
     puts result[0..-3]
   end
 
@@ -49,7 +50,6 @@ class Tree
         @head.children<<@child
         @child.parent=@head
         @nodes<<@child
-        #add_child(finish)
         if @child.value==finish
           until @child==nil
             @route.unshift @child
@@ -113,8 +113,15 @@ class Board
 end
 
 tree=Tree.new
-tree.knight_travails(0,13)
 board=Board.new
 board.create_grid
+puts ""
+puts "Please input the coordinates you wish to map"
+print "Start: "
+one=Integer(gets.chomp)
+print "Finish: "
+two=Integer(gets.chomp)
+puts ""
+tree.knight_travails(one,two)
 board.route_hash(tree.path)
 board.show_hash
